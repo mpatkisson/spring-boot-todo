@@ -1,23 +1,8 @@
 package com.triptacular.core;
 
-public class Task {
+public class Task extends Entity {
     
-    private int id;
     private String item;
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @return the item
