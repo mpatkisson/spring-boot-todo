@@ -1,12 +1,18 @@
 package com.triptacular.web;
 
+import com.triptacular.core.Task;
 import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasSize;
 import org.junit.Before;
 import org.junit.Test;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -44,7 +50,21 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         service.add("Do that");
         mockMvc.perform(get("/api/tasks"))
                .andDo(print())
-               .andExpect(status().isOk());
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$", hasSize(2)));
+    }
+    
+    @Test
+    public void canGetById() throws Exception {
+        Task added = service.add("Do this");
+        int id = added.getId();
+        String url = "/api/tasks/task/" + id;
+        mockMvc.perform(get(url))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$.id").value(id));
     }
     
 }
