@@ -1,9 +1,7 @@
 package com.triptacular.services;
 
 import com.triptacular.core.Task;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -68,6 +66,16 @@ public class InMemoryTaskServiceTest {
         Task task = new Task();
         task.setItem("New Item");
         task = service.add(task);
+        Task added = service.getById(task.getId());
+        assertNotNull(added);
+    }
+    
+    /**
+     * Determines if a new task can be added using the task item.
+     */
+    @Test
+    public void canAddTaskByItem() {
+        Task task = service.add(DEFAULT_ITEM);
         Task added = service.getById(task.getId());
         assertNotNull(added);
     }

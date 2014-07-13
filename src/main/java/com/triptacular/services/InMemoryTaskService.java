@@ -3,7 +3,9 @@ package com.triptacular.services;
 import com.triptacular.core.Task;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Component;
 
 /**
@@ -55,6 +57,13 @@ public class InMemoryTaskService implements TaskService {
         task.setId(id);
         tasks.add(task);
         return task;
+    }
+    
+    @Override
+    public Task add(String item) {
+        Task task = new Task();
+        task.setItem(item);
+        return add(task);
     }
     
     @Override

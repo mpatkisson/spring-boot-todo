@@ -4,7 +4,6 @@ import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockitoAnnotations;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -17,12 +16,14 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
+    private TaskController controller;
+    private TaskService service;
 
     @Before
     public void setup() {
         InternalResourceViewResolver resolver = viewResolver();
-        TaskService service = new InMemoryTaskService();
-        TaskController controller = new TaskController(service);
+        service = new InMemoryTaskService();
+        controller = new TaskController(service);
         mockMvc = standaloneSetup(controller)
                 .setViewResolvers(resolver)
                 .build();
@@ -39,6 +40,8 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     
     @Test
     public void canGetAll() throws Exception {
+        service.add("Do this");
+        service.add("Do that");
         mockMvc.perform(get("/api/tasks"))
                .andDo(print())
                .andExpect(status().isOk());

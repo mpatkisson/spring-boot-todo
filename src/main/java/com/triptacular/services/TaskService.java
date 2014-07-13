@@ -8,4 +8,10 @@ import com.triptacular.core.Task;
  */
 public interface TaskService extends EntityService<Task> {
     
+    /**
+     * Adds a new task.
+     * @param item The todo item associated with the task.
+     * @return The newly added Task.
+     */
+    Task add(String item); 
 }
