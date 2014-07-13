@@ -1,13 +1,10 @@
 package com.triptacular.web;
 
-import com.triptacular.core.Task;
-import java.util.List;
-import static org.junit.Assert.assertNotNull;
+import com.triptacular.services.InMemoryTaskService;
+import com.triptacular.services.TaskService;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
@@ -21,13 +18,11 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
 
-    @InjectMocks
-    TaskController controller;
-
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
         InternalResourceViewResolver resolver = viewResolver();
+        TaskService service = new InMemoryTaskService();
+        TaskController controller = new TaskController(service);
         mockMvc = standaloneSetup(controller)
                 .setViewResolvers(resolver)
                 .build();
@@ -42,9 +37,10 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         .andExpect(forwardedUrl(FORWARDED_URL));
     }
     
-    //@Test
+    @Test
     public void canGetAll() throws Exception {
-        mockMvc.perform(get("/tasks"))
+        mockMvc.perform(get("/api/tasks"))
+               .andDo(print())
                .andExpect(status().isOk());
     }
     

@@ -1,21 +1,22 @@
 package com.triptacular.web;
 
 import com.triptacular.core.Task;
-import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class TaskController {
 
-    @Autowired
     private TaskService service;
+    
+    @Autowired
+    public TaskController(TaskService service) {
+        this.service = service;
+    }
     
     @RequestMapping("/index.html")
     public ModelAndView index() {
@@ -23,7 +24,7 @@ public class TaskController {
         return view;
     }
 
-    @RequestMapping("/tasks")
+    @RequestMapping("/api/tasks")
     public List<Task> getAll() {
         return service.getAll();
     }
