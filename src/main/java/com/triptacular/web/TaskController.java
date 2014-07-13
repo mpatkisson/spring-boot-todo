@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,24 +35,20 @@ public class TaskController {
     public Task getById(@PathVariable("id") int id) {
         return service.getById(id);
     }
-    
-        /*
 
-    @RequestMapping(value = "/tasks/task", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/tasks/task", method = RequestMethod.POST)
     public Task create(Task task) {
         return service.save(task);
     }
-    
-    @RequestMapping(value = "/tasks/task", method = RequestMethod.PUT)
+
+    @RequestMapping(value = "/api/tasks/task", method = RequestMethod.PUT)
     public Task update(Task task) {
         return service.save(task);
     }
     
-    @RequestMapping(value = "/tasks/task", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/tasks/task", method = RequestMethod.DELETE)
     public void delete(Task task) {
         service.delete(task);
     }
-    
-    */
     
 }

@@ -3,14 +3,21 @@ package com.triptacular.web;
 import com.triptacular.core.Task;
 import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
+import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasSize;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -65,6 +72,52 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
                .andExpect(status().isOk())
                .andExpect(content().contentType("application/json;charset=UTF-8"))
                .andExpect(jsonPath("$.id").value(id));
+    }
+    
+    @Test
+    public void canCreate() throws Exception {
+        MockHttpServletRequestBuilder request = 
+                MockMvcRequestBuilders.post("/api/tasks/task")
+                                      .param("item", "Do this");
+        mockMvc.perform(request)
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$.id").value(1));
+    }
+    
+    @Test
+    public void canUpdate() throws Exception {
+        Task task = service.add("Do this");
+        int id = task.getId();
+        String item = "Do that";
+        MockHttpServletRequestBuilder request;
+        request = MockMvcRequestBuilders.put("/api/tasks/task")
+                                        .param("id", Integer.toString(id))
+                                        .param("item", item);
+        mockMvc.perform(request)
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$.item").value(item));
+    }
+    
+    @Test
+    public void canDelete() throws Exception {
+        service.add("Do this");
+        List<Task> tasks = service.getAll();
+        Assert.assertTrue(tasks.size() > 0);
+        Task task = tasks.get(0);
+        int id = task.getId();
+        String item = task.getItem();
+        MockHttpServletRequestBuilder request;
+        request = MockMvcRequestBuilders.delete("/api/tasks/task")
+                                        .param("id", Integer.toString(id))
+                                        .param("item", item);
+        mockMvc.perform(request)
+               .andDo(print())
+               .andExpect(status().isOk());
+        Assert.assertTrue(service.getCount() == 0);
     }
     
 }
