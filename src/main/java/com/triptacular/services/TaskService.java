@@ -14,4 +14,10 @@ public interface TaskService extends EntityService<Task> {
      * @return The newly added Task.
      */
     Task add(String item); 
+    
+    /**
+     * Deletes an existing task.
+     * @param id The ID of the task to delete.
+     */
+    void delete(int id);
 }

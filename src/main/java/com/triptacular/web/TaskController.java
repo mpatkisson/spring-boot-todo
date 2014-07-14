@@ -31,7 +31,7 @@ public class TaskController {
         return service.getAll();
     }
     
-    @RequestMapping("/api/tasks/task/{id}")
+    @RequestMapping(value = "/api/tasks/task/{id}", method = RequestMethod.GET)
     public Task getById(@PathVariable("id") int id) {
         return service.getById(id);
     }
@@ -49,6 +49,11 @@ public class TaskController {
     @RequestMapping(value = "/api/tasks/task", method = RequestMethod.DELETE)
     public void delete(Task task) {
         service.delete(task);
+    }
+    
+    @RequestMapping(value = "/api/tasks/task/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") int id) {
+        service.delete(id);
     }
     
 }
