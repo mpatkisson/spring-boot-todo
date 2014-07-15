@@ -1,5 +1,6 @@
 package com.triptacular.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.triptacular.core.Task;
 import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
@@ -8,6 +9,7 @@ import static org.hamcrest.Matchers.hasSize;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,12 +26,14 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
+    private ObjectMapper mapper;
     private TaskController controller;
     private TaskService service;
 
     @Before
     public void setup() {
         InternalResourceViewResolver resolver = viewResolver();
+        mapper = new ObjectMapper();
         service = new InMemoryTaskService();
         controller = new TaskController(service);
         mockMvc = standaloneSetup(controller)
@@ -71,9 +75,17 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     
     @Test
     public void canCreate() throws Exception {
+        Task task = new Task();
+        task.setItem("Do This");
+        String json = mapper.writeValueAsString(task);
+        System.out.println("\n**\n");
+        System.out.println(json);
+        System.out.println("\n**\n");
         MockHttpServletRequestBuilder request = 
                 MockMvcRequestBuilders.post("/api/tasks/task")
-                                      .param("item", "Do this");
+                                      .contentType(MediaType.APPLICATION_JSON)
+                                      .accept(MediaType.APPLICATION_JSON)
+                                      .content(json);
         mockMvc.perform(request)
                .andDo(print())
                .andExpect(status().isOk())
