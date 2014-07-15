@@ -3,6 +3,7 @@ package com.triptacular.web;
 import com.triptacular.core.Task;
 import com.triptacular.services.TaskService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class TaskController {
 
     private TaskService service;
+    private HttpServletRequest request; 
+    
     
     @Autowired
-    public TaskController(TaskService service) {
+    public TaskController(TaskService service, HttpServletRequest request) {
         this.service = service;
+        this.request = request;
     }
     
     @RequestMapping("/index.html")

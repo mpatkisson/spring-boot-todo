@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en" data-ng-app="">
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Spring Boot ToDo</title>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/styles/jumbotron.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                </button><a class="navbar-brand" href="#">Spring Boot ToDo</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Email" type="text" />
+                    </div>&nbsp;
+
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Password" type="password" />
+                    </div>&nbsp;<button class="btn btn-success" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div data-ng-controller="TaskCtrl">
+        <div class="jumbotron">
+            <div class="container">
+                <script type="text/javascript">
+                    window.initial = {};
+                </script>
+
+                <h1>Find Places</h1>
+
+                <ul class="list-unstyled">
+                    <li data-ng-repeat="task in tasks">
+                        <span data-ng-hide="editing" data-ng-bind="task.item"></span>
+                        <input type="text" data-ng-model="task.item" data-ng-show="editing" />&nbsp;
+                        <a href="#" data-ng-click="editing = true" data-ng-hide="editing">edit</a>
+                        <a href="#" data-ng-click="updateTask(task); editing = false" data-ng-show="editing">update</a>&nbsp;
+                        <a href="#" data-ng-click="removeTask($index)" data-ng-show="editing">delete</a>&nbsp;
+                        <a href="#" data-ng-click="editing = false" data-ng-show="editing">cancel</a>
+                    </li>
+                </ul>
+
+                <h4>(Total = {{total()}})</h4>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr />
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="name">Task Name</label><br />
+                    <input class="form-control" id="name" placeholder="Enter a name for this task" style="width: 300px" type="text" data-ng-model="taskText" />&nbsp;
+                    <button class="btn" data-ng-click="addTask()">Submit</button>
+                </div>
+            </form>
+            <hr />
+
+            <footer>
+                <p>© triptacular.com 2013</p>
+            </footer>
+        </div>
+    </div>
+    <script src="/scripts/angular-1.2.0.min.js" type="text/javascript"></script>
+    <script src="/scripts/tasks.js" type="text/javascript"></script>
+</body>
+</html>

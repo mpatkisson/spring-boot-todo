@@ -1,6 +1,6 @@
 
 function TaskCtrl($scope, $http, $window) {
-    var baseUrl = 'http://localhost:8000/api/tasks';
+    var baseUrl = 'http://localhost:8080/api/tasks';
     $scope.tasks = [];
     $scope.editing = false;
 
@@ -22,8 +22,7 @@ function TaskCtrl($scope, $http, $window) {
 
     $scope.addTask = function() {
         var task = {
-            "name": $scope.taskText,
-            "updated": Date.now()
+            "item": $scope.taskText
         },
         url = baseUrl + '/task';
         $http.post(url, task).
