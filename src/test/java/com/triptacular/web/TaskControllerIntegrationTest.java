@@ -26,6 +26,7 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
+    private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
     private TaskController controller;
     private TaskService service;
@@ -57,7 +58,7 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         mockMvc.perform(get("/api/tasks"))
                .andDo(print())
                .andExpect(status().isOk())
-               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(content().contentType(JSON_CONTENT_TYPE))
                .andExpect(jsonPath("$", hasSize(2)));
     }
     
@@ -69,7 +70,7 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         mockMvc.perform(get(url))
                .andDo(print())
                .andExpect(status().isOk())
-               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(content().contentType(JSON_CONTENT_TYPE))
                .andExpect(jsonPath("$.id").value(id));
     }
     
@@ -78,18 +79,14 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         Task task = new Task();
         task.setItem("Do This");
         String json = mapper.writeValueAsString(task);
-        System.out.println("\n**\n");
-        System.out.println(json);
-        System.out.println("\n**\n");
         MockHttpServletRequestBuilder request = 
                 MockMvcRequestBuilders.post("/api/tasks/task")
                                       .contentType(MediaType.APPLICATION_JSON)
-                                      .accept(MediaType.APPLICATION_JSON)
                                       .content(json);
         mockMvc.perform(request)
                .andDo(print())
                .andExpect(status().isOk())
-               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(content().contentType(JSON_CONTENT_TYPE))
                .andExpect(jsonPath("$.id").value(1));
     }
     
@@ -98,14 +95,16 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         Task task = service.add("Do this");
         int id = task.getId();
         String item = "Do that";
+        task.setItem(item);
+        String json = mapper.writeValueAsString(task);
         MockHttpServletRequestBuilder request;
         request = MockMvcRequestBuilders.put("/api/tasks/task")
-                                        .param("id", Integer.toString(id))
-                                        .param("item", item);
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(json);
         mockMvc.perform(request)
                .andDo(print())
                .andExpect(status().isOk())
-               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(content().contentType(JSON_CONTENT_TYPE))
                .andExpect(jsonPath("$.item").value(item));
     }
     
@@ -115,12 +114,11 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
         List<Task> tasks = service.getAll();
         Assert.assertTrue(tasks.size() > 0);
         Task task = tasks.get(0);
-        int id = task.getId();
-        String item = task.getItem();
+        String json = mapper.writeValueAsString(task);
         MockHttpServletRequestBuilder request;
         request = MockMvcRequestBuilders.delete("/api/tasks/task")
-                                        .param("id", Integer.toString(id))
-                                        .param("item", item);
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(json);
         mockMvc.perform(request)
                .andDo(print())
                .andExpect(status().isOk());

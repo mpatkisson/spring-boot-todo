@@ -16,7 +16,6 @@ public class TaskController {
 
     private TaskService service;
     
-    
     @Autowired
     public TaskController(TaskService service) {
         this.service = service;
@@ -44,12 +43,12 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/api/tasks/task", method = RequestMethod.PUT)
-    public Task update(Task task) {
+    public Task update(@RequestBody Task task) {
         return service.save(task);
     }
     
     @RequestMapping(value = "/api/tasks/task", method = RequestMethod.DELETE)
-    public void delete(Task task) {
+    public void delete(@RequestBody Task task) {
         service.delete(task);
     }
     
