@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class TaskController {
 
-    private TaskService service;
+    private final TaskService service;
     
     @Autowired
     public TaskController(TaskService service) {
