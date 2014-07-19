@@ -9,7 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.springframework.stereotype.Component;
 
+/**
+ * Provides MongoDB CRUD related services for Task typed entities.
+ * @author Mike Atkisson
+ */
+@Component
 public class MongoTaskService implements TaskService {
 
     private final MongoCollection tasks;

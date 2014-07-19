@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * Provides an in memory implementation of TaskService
  * @author Mike Atkisson
  */
-@Component
 public class InMemoryTaskService implements TaskService {
     private final List<Task> tasks;
     

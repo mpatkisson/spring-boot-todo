@@ -1,21 +1,9 @@
 package com.triptacular.core;
 
-import org.bson.types.ObjectId;
-
 public abstract class Entity implements Comparable<Entity> {
-    
-    private ObjectId _id;
     
     private int id;
     
-    public ObjectId getObjectId() {
-        return _id;
-    }
-    
-    public void setObjectId(ObjectId id) {
-        _id = id;
-    }
-
     public int getId() {
         return id;
     }
