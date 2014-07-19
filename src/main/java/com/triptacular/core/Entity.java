@@ -1,29 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.triptacular.core;
 
-/**
- *
- * @author mike
- */
+import org.bson.types.ObjectId;
+
 public abstract class Entity implements Comparable<Entity> {
     
+    private ObjectId _id;
+    
     private int id;
+    
+    public ObjectId getObjectId() {
+        return _id;
+    }
+    
+    public void setObjectId(ObjectId id) {
+        _id = id;
+    }
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }

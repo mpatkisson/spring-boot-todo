@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class InMemoryTaskService implements TaskService {
-    private List<Task> tasks;
+    private final List<Task> tasks;
     
     public InMemoryTaskService() {
         tasks = new ArrayList<Task>();
