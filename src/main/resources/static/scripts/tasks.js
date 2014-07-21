@@ -4,17 +4,10 @@ function TaskCtrl($scope, $http, $window) {
     $scope.tasks = [];
     $scope.editing = false;
 
-    $http.get(baseUrl).
-          success(function (data) {
-              for (var i = 0; i < data.length; i++) {
-                  var task = data[i];
-                  $scope.tasks.push(task);
-              }        
-          }).
-          error(function (data) {
-            alert("Unable to get all tasks.");
-          });
-    
+    for (var i = 0; i < $window.initial.length; i++) {
+        var task = $window.initial[i];
+        $scope.tasks.push(task);
+    }
 
     $scope.total = function() {
         return $scope.tasks.length;
@@ -45,7 +38,7 @@ function TaskCtrl($scope, $http, $window) {
                 alert("Unable to save task.");
             });
         $scope.editing = false;
-    }
+    };
 
     $scope.removeTask = function(index) {
         var task = $scope.tasks[index],
@@ -57,7 +50,6 @@ function TaskCtrl($scope, $http, $window) {
               error(function(data) {
                  alert("Unable to delete task.");
               });
-    }
+    };
 
 }
-

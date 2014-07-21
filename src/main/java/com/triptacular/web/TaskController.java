@@ -1,5 +1,7 @@
 package com.triptacular.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.triptacular.core.Task;
 import com.triptacular.services.TaskService;
 import java.util.List;
@@ -22,8 +24,10 @@ public class TaskController {
     }
     
     @RequestMapping("/index.html")
-    public ModelAndView index() {
+    public ModelAndView index() throws JsonProcessingException {
         ModelAndView view = new ModelAndView("index");
+        List<Task> tasks = service.getAll();
+        view.addObject("tasks", tasks);
         return view;
     }
 
