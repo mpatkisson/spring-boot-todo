@@ -2,6 +2,7 @@ package com.triptacular.services;
 
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.triptacular.core.Task;
 import java.net.UnknownHostException;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,10 +20,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MongoTaskService implements TaskService {
 
+    private final Mongo mongo;
     private final MongoCollection tasks;
     
-    public MongoTaskService() throws UnknownHostException {
-        DB db = new MongoClient().getDB("todo");
+    @Autowired
+    public MongoTaskService(Mongo mongo) {
+        this.mongo = mongo;
+        DB db = mongo.getDB("todo");
         Jongo jongo = new Jongo(db);
         tasks = jongo.getCollection("tasks");
     }
