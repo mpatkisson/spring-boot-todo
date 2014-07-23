@@ -1,13 +1,17 @@
 package com.triptacular.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.DB;
+import com.mongodb.Mongo;
 import com.triptacular.Application;
 import com.triptacular.core.Task;
 import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.hasSize;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -37,6 +40,9 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     private static final String FORWARDED_URL = "/templates/index.html";
     private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
+
+    @Autowired
+    private Mongo mongo;
     
     @Autowired
     private TaskController controller;
@@ -48,10 +54,15 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     public void setup() {
         InternalResourceViewResolver resolver = viewResolver();
         mapper = new ObjectMapper();
-        //controller = new TaskController(service);
-        mockMvc = standaloneSetup(controller)
-                .setViewResolvers(resolver)
-                .build();
+        mockMvc = standaloneSetup(controller).setViewResolvers(resolver).build();
+    }
+
+    @After
+    public void tearDown() {
+        DB db = mongo.getDB("todo");
+        Jongo jongo = new Jongo(db);
+        MongoCollection collection = jongo.getCollection("tasks");
+        collection.remove();
     }
     
     @Test
