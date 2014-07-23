@@ -1,15 +1,21 @@
 package com.triptacular.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.triptacular.Application;
 import com.triptacular.core.Task;
 import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasSize;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -17,26 +23,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
     private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
+    
+    @Autowired
     private TaskController controller;
+    
+    @Autowired
     private TaskService service;
 
     @Before
     public void setup() {
         InternalResourceViewResolver resolver = viewResolver();
         mapper = new ObjectMapper();
-        service = new InMemoryTaskService();
-        controller = new TaskController(service);
+        //controller = new TaskController(service);
         mockMvc = standaloneSetup(controller)
                 .setViewResolvers(resolver)
                 .build();
