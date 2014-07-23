@@ -1,7 +1,8 @@
 package com.triptacular.services;
 
 import com.mongodb.DB;
-import com.mongodb.MongoClient;
+import com.mongodb.Mongo;
+import com.triptacular.Application;
 import com.triptacular.core.Task;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -13,16 +14,28 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Tests the in memory task service.
  * @author Mike Atkisson
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class MongoTaskServiceTest {
     
     private final String DEFAULT_ITEM = "Test Item";
     private int firstId;
+    
+    @Autowired
+    private Mongo mongo;
+    
+    @Autowired
     private MongoTaskService service;
+    
     private MongoCollection collection;
     
     public MongoTaskServiceTest() {
@@ -38,10 +51,10 @@ public class MongoTaskServiceTest {
     
     @Before
     public void setUp() throws UnknownHostException {
-        DB db = new MongoClient().getDB("todo");
+        DB db = mongo.getDB("todo");
         Jongo jongo = new Jongo(db);
         collection = jongo.getCollection("tasks");
-        service = new MongoTaskService();
+        //service = new MongoTaskService(mongo);
         Task task = new Task();
         task.setItem(DEFAULT_ITEM);
         task = service.save(task);

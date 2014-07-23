@@ -20,8 +20,7 @@ public class Application {
      * Factory bean that creates the com.mongodb.Mongo instance
      */
      public @Bean MongoFactoryBean mongo() {
-          MongoFactoryBean factory = new MongoFactoryBean();
-          return factory;
+          return new TestableMongoFactoryBean();
      }
 
 }

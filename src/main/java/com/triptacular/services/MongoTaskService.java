@@ -20,12 +20,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MongoTaskService implements TaskService {
 
-    private final Mongo mongo;
     private final MongoCollection tasks;
     
     @Autowired
     public MongoTaskService(Mongo mongo) {
-        this.mongo = mongo;
         DB db = mongo.getDB("todo");
         Jongo jongo = new Jongo(db);
         tasks = jongo.getCollection("tasks");
@@ -68,10 +66,16 @@ public class MongoTaskService implements TaskService {
 
     @Override
     public List<Task> getSorted() {
+        List<Task> sorted = new ArrayList();
         Iterable<Task> found = tasks.find()
                                     .sort("{ id: 1 }")
                                     .as(Task.class);
-        return Lists.newArrayList(found);
+        try {
+            sorted = Lists.newArrayList(found);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return sorted;
     }
 
     @Override

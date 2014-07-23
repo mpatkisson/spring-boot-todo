@@ -39,4 +39,9 @@ public class TestableMongoFactoryBean extends MongoFactoryBean {
         }
     }
     
+    @Override
+    public void destroy() throws Exception {
+        this.mongo.close();
+    }
+    
 }
