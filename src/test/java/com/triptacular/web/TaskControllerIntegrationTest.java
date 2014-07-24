@@ -5,7 +5,6 @@ import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.triptacular.Application;
 import com.triptacular.core.Task;
-import com.triptacular.services.InMemoryTaskService;
 import com.triptacular.services.TaskService;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
