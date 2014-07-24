@@ -1,12 +1,9 @@
 package com.triptacular.services;
 
-import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.triptacular.Application;
 import com.triptacular.core.Task;
 import java.net.UnknownHostException;
 import java.util.List;
-import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,12 +28,10 @@ public class MongoTaskServiceTest {
     private int firstId;
     
     @Autowired
-    private Mongo mongo;
-    
-    @Autowired
     private MongoTaskService service;
     
-    private MongoCollection collection;
+    @Autowired
+    private MongoCollection tasks;
     
     public MongoTaskServiceTest() {
     }
@@ -51,10 +46,6 @@ public class MongoTaskServiceTest {
     
     @Before
     public void setUp() throws UnknownHostException {
-        DB db = mongo.getDB("todo");
-        Jongo jongo = new Jongo(db);
-        collection = jongo.getCollection("tasks");
-        //service = new MongoTaskService(mongo);
         Task task = new Task();
         task.setItem(DEFAULT_ITEM);
         task = service.save(task);
@@ -63,7 +54,7 @@ public class MongoTaskServiceTest {
     
     @After
     public void tearDown() {
-        collection.remove();
+        tasks.remove();
     }
 
     /**
@@ -153,8 +144,8 @@ public class MongoTaskServiceTest {
      */
     @Test
     public void canGetAll() {
-        List<Task> tasks = service.getAll();
-        Assert.assertEquals(tasks.size(), service.getCount());
+        List<Task> all = service.getAll();
+        Assert.assertEquals(all.size(), service.getCount());
     }
 
     /**
@@ -162,9 +153,9 @@ public class MongoTaskServiceTest {
      */
     @Test
     public void getAllReturnsNonNullCollection() {
-        collection.remove();
-        Object tasks = service.getAll();
-        Assert.assertNotNull(tasks);
+        tasks.remove();
+        Object all = service.getAll();
+        Assert.assertNotNull(all);
     }
 
     /**
@@ -186,16 +177,16 @@ public class MongoTaskServiceTest {
         Task task = new Task();
         task.setItem("item 2");
         service.save(task);
-        List<Task> tasks = service.getSorted();
-        for (int i = 0; i < tasks.size() - 1; i++) {
-            Task lesser = tasks.get(i);
-            Task greater = tasks.get(i + 1);
+        List<Task> sorted = service.getSorted();
+        for (int i = 0; i < sorted.size() - 1; i++) {
+            Task lesser = sorted.get(i);
+            Task greater = sorted.get(i + 1);
             Assert.assertTrue(lesser.getId() < greater.getId());
         }
     }
 
     private Task getFirst() {
-        return collection.findOne("{ id: # }", firstId).as(Task.class);
+        return tasks.findOne("{ id: # }", firstId).as(Task.class);
     }
     
 }

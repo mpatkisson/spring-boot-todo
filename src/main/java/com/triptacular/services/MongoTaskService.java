@@ -3,9 +3,7 @@ package com.triptacular.services;
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
 import com.triptacular.core.Task;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import org.jongo.Jongo;
@@ -23,10 +21,8 @@ public class MongoTaskService implements TaskService {
     private final MongoCollection tasks;
     
     @Autowired
-    public MongoTaskService(Mongo mongo) {
-        DB db = mongo.getDB("todo");
-        Jongo jongo = new Jongo(db);
-        tasks = jongo.getCollection("tasks");
+    public MongoTaskService(MongoCollection tasks) {
+        this.tasks = tasks;
     }
     
     @Override

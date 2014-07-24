@@ -1,14 +1,11 @@
 package com.triptacular.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.triptacular.Application;
 import com.triptacular.core.Task;
 import com.triptacular.services.TaskService;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.After;
 import org.junit.Assert;
@@ -41,13 +38,13 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     private ObjectMapper mapper;
 
     @Autowired
-    private Mongo mongo;
-    
-    @Autowired
     private TaskController controller;
     
     @Autowired
     private TaskService service;
+    
+    @Autowired
+    private MongoCollection tasks;
 
     @Before
     public void setup() {
@@ -58,10 +55,7 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     @After
     public void tearDown() {
-        DB db = mongo.getDB("todo");
-        Jongo jongo = new Jongo(db);
-        MongoCollection collection = jongo.getCollection("tasks");
-        collection.remove();
+        tasks.remove();
     }
     
     @Test
