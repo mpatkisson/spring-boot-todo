@@ -1,12 +1,9 @@
 package com.triptacular.services;
 
 import com.google.common.collect.Lists;
-import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.triptacular.core.Task;
 import java.util.ArrayList;
 import java.util.List;
-import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
