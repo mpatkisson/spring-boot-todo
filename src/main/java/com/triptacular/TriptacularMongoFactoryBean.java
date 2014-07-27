@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.MongoFactoryBean;
  * 
  * @author Mike Atkisson
  */
-public class TestableMongoFactoryBean extends MongoFactoryBean {
+public class TriptacularMongoFactoryBean extends MongoFactoryBean {
     
     private Mongo mongo;
     
