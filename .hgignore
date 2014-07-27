@@ -4,3 +4,5 @@
 \.rej$
 \.conflict\~$
 ^target$
+syntax: glob
+nb-configuration.xml
