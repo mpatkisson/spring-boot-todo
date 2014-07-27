@@ -2,6 +2,8 @@ package com.triptacular;
 
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
+import java.io.InputStream;
+import java.util.Properties;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 
 /**
@@ -13,7 +15,6 @@ import org.springframework.data.mongodb.core.MongoFactoryBean;
 public class TestableMongoFactoryBean extends MongoFactoryBean {
     
     private Mongo mongo;
-    private String env = "test";
     
     /**
      * Gets the Mongo instance created by this factory.
@@ -30,12 +31,13 @@ public class TestableMongoFactoryBean extends MongoFactoryBean {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (env.equals("test")) {
+        Settings settings = new Settings();
+        if (settings.getDbType().equals("fongo")) {
             Fongo fongo = new Fongo("InMemoryMongo");
-            this.mongo = fongo.getMongo();
+            mongo = fongo.getMongo();
         } else {
             super.afterPropertiesSet();
-            this.mongo = super.getObject();
+            mongo = super.getObject();
         }
     }
     
