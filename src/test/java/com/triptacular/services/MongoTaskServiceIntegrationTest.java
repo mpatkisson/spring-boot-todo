@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-public class MongoTaskServiceTest {
+public class MongoTaskServiceIntegrationTest {
     
     private final String DEFAULT_ITEM = "Test Item";
     private int firstId;
@@ -33,7 +33,7 @@ public class MongoTaskServiceTest {
     @Autowired
     private MongoCollection tasks;
     
-    public MongoTaskServiceTest() {
+    public MongoTaskServiceIntegrationTest() {
     }
     
     @BeforeClass
