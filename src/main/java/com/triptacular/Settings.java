@@ -13,6 +13,11 @@ import java.util.Properties;
 public class Settings {
     
     public static final String APP_PROPS = "/application.properties";
+    public static final String DEPLOY_TYPE_TESTING = "testing";
+    public static final String DEPLOY_TYPE_DEVELOPMENT = "development";
+    public static final String DEPLOY_TYPE_STAGING = "staging";
+    public static final String DEPLOY_TYPE_PRODUCTION = "production";
+    
     
     private Boolean isThymeleafCached;
     private String deploymentType;
@@ -34,7 +39,7 @@ public class Settings {
      * @return True if the deployment type is testing.
      */
     public boolean isTesting() {
-        return getDeploymentType().equals("testing");
+        return getDeploymentType().equals(DEPLOY_TYPE_TESTING);
     }
     
     /**
@@ -42,7 +47,7 @@ public class Settings {
      * @return True if the deployment type is development.
      */
     public boolean isDevelopment() {
-        return getDeploymentType().equals("development");
+        return getDeploymentType().equals(DEPLOY_TYPE_DEVELOPMENT);
     }
     
     /**
@@ -50,7 +55,7 @@ public class Settings {
      * @return True if the deployment type is staging.
      */
     public boolean isStaging() {
-        return getDeploymentType().equals("staging");
+        return getDeploymentType().equals(DEPLOY_TYPE_STAGING);
     }
     
     /**
@@ -58,7 +63,7 @@ public class Settings {
      * @return True if the deployment type is production.
      */
     public boolean isProduction() {
-        return getDeploymentType().equals("production");
+        return getDeploymentType().equals(DEPLOY_TYPE_PRODUCTION);
     }
     
     /**
