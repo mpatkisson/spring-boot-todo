@@ -4,9 +4,7 @@ import com.mongodb.DB;
 import com.mongodb.Mongo;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
@@ -19,7 +17,6 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
  * @author Mike Atkisson
  */
 @Configuration
-//@ComponentScan
 public class MongoConfig {
     
     @Bean
