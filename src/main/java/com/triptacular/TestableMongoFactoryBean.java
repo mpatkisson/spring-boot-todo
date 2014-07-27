@@ -2,8 +2,6 @@ package com.triptacular;
 
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
-import java.io.InputStream;
-import java.util.Properties;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 
 /**
