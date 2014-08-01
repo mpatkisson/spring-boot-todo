@@ -6,3 +6,4 @@
 ^target$
 syntax: glob
 nb-configuration.xml
+triptacular.todo.log
