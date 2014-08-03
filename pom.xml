@@ -73,6 +73,11 @@
             <artifactId>angularjs</artifactId>
             <version>1.2.19</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.2.0</version>
+        </dependency>
         
     </dependencies>
 
@@ -132,7 +137,7 @@
                 </configuration>
             </plugin>
             
-            <plugin>
+             <plugin>
                 <groupId>org.lesscss</groupId>
                 <artifactId>lesscss-maven-plugin</artifactId>
                 <version>1.7.0.1.1</version>
@@ -144,13 +149,6 @@
                         <include>main.less</include>
                     </includes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             
         </plugins>
