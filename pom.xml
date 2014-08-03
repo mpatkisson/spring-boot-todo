@@ -143,7 +143,6 @@
                     <includes>
                         <include>main.less</include>
                     </includes>
-                    <watch>false</watch>
                 </configuration>
                 <executions>
                     <execution>
