@@ -1,6 +1,6 @@
 
 function TaskCtrl($scope, $http, $window) {
-    var baseUrl = 'http://localhost:8080/api/tasks';
+    var baseUrl = '/api/tasks';
     $scope.tasks = [];
     $scope.editing = false;
 
