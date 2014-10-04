@@ -23,7 +23,7 @@ public class TaskController {
         this.service = service;
     }
     
-    @RequestMapping("/index.html")
+    @RequestMapping(value = {"/", "/index", "/index.html"})
     public ModelAndView index() throws JsonProcessingException {
         ModelAndView view = new ModelAndView("index");
         List<Task> tasks = service.getAll();
