@@ -3,12 +3,22 @@
 \.chg\..*$
 \.rej$
 \.conflict\~$
-^target$
 syntax: glob
-nb-configuration.xml
-triptacular.todo.log
 
 # Intellij
 .idea/
 *.iml
 *.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Netbeans
+nb-configuration.xml
+
+#Maven
+target/
+log/
+triptacular.todo.log
