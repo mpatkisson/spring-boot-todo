@@ -7,3 +7,8 @@
 syntax: glob
 nb-configuration.xml
 triptacular.todo.log
+
+# Intellij
+.idea/
+*.iml
+*.iws
