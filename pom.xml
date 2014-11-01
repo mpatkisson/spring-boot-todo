@@ -16,6 +16,10 @@
         <version>1.1.4.RELEASE</version>
     </parent>
 
+    <properties>
+        <wro4j.version>1.7.6</wro4j.version>
+    </properties>
+
     <!-- Add typical dependencies for a web application -->
     <dependencies>
         
@@ -136,8 +140,9 @@
                     -->
                 </configuration>
             </plugin>
-            
-             <plugin>
+
+            <!--
+            <plugin>
                 <groupId>org.lesscss</groupId>
                 <artifactId>lesscss-maven-plugin</artifactId>
                 <version>1.7.0.1.1</version>
@@ -150,7 +155,28 @@
                     </includes>
                 </configuration>
             </plugin>
-            
+            -->
+
+            <plugin>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-maven-plugin</artifactId>
+                <version>${wro4j.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+                    <destinationFolder>${basedir}/target/classes/static/</destinationFolder>
+                    <wroFile>${basedir}/src/main/wro/wro.xml</wroFile>
+                    <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
