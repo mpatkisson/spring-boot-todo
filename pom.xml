@@ -8,12 +8,12 @@
     <groupId>com.triptacular</groupId>
     <artifactId>todo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
+    
     <!-- Inherit defaults from Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.1.4.RELEASE</version>
+        <version>1.1.9.RELEASE</version>
     </parent>
 
     <!-- Add typical dependencies for a web application -->
@@ -52,7 +52,6 @@
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>0.9.1</version>
         </dependency>
         
         <!-- Mongo / Data -->
@@ -77,6 +76,25 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>3.2.0</version>
+        </dependency>
+        
+        <!-- Thymeleaf Extensions -->
+        <dependency>
+            <groupId>com.github.dtrunk90</groupId>
+            <artifactId>thymeleaf-jawr-extension</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        
+        <!-- Java Web Resource Bundler -->
+        <dependency>
+            <groupId>net.jawr</groupId>
+            <artifactId>jawr-core</artifactId>
+            <version>3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>net.jawr.extensions</groupId>
+            <artifactId>jawr-spring-extension</artifactId>
+            <version>3.6</version>
         </dependency>
         
     </dependencies>

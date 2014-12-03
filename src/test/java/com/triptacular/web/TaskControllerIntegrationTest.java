@@ -5,6 +5,7 @@ import com.triptacular.Application;
 import com.triptacular.core.Task;
 import com.triptacular.services.TaskService;
 import java.util.List;
+import javax.servlet.ServletContext;
 import static org.hamcrest.Matchers.hasSize;
 import org.jongo.MongoCollection;
 import org.junit.After;
@@ -13,9 +14,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,12 +34,17 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration("file:src/main/resources")
+@IntegrationTest
 public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
     private static final String FORWARDED_URL = "/templates/index.html";
     private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
+    
+    @Autowired
+    private ServletContext servletContext;
 
     @Autowired
     private TaskController controller;
