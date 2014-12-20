@@ -53,7 +53,7 @@ public class JawrCssController extends AbstractJawrController {
 	 * @see net.jawr.web.servlet.JawrSpringController#handleRequest(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	@RequestMapping(value = "/**/**.css", method = RequestMethod.GET)
+	@RequestMapping(value = "/styles/**.css", method = RequestMethod.GET)
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		return super.handleRequest(request, response);

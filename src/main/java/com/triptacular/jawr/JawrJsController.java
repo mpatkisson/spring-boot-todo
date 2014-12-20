@@ -61,7 +61,7 @@ public class JawrJsController extends AbstractJawrController {
 	 * @see net.jawr.web.servlet.JawrSpringController#handleRequest(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	@RequestMapping(value = "/**/**.js", method = RequestMethod.GET)
+	@RequestMapping(value = {"/scripts/**.js", "/**/bundles/**.js", "/jawr_generator.js"}, method = RequestMethod.GET)
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		return super.handleRequest(request, response);
