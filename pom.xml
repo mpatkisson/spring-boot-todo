@@ -96,6 +96,11 @@
             <artifactId>jawr-spring-extension</artifactId>
             <version>3.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.asual.lesscss</groupId>
+            <artifactId>lesscss-engine</artifactId>
+            <version>1.5.1</version>
+        </dependency>
         
     </dependencies>
 
@@ -155,21 +160,26 @@
                 </configuration>
             </plugin>
 
-            <!--
             <plugin>
                 <groupId>org.lesscss</groupId>
                 <artifactId>lesscss-maven-plugin</artifactId>
                 <version>1.7.0.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <sourceDirectory>${project.basedir}/src/main/less</sourceDirectory>
-                    <outputDirectory>${project.build.directory}/classes/static/styles</outputDirectory>
+                    <outputDirectory>${project.basedir}/src/main/resources/static/styles</outputDirectory>
                     <compress>false</compress>
                     <includes>
                         <include>main.less</include>
                     </includes>
                 </configuration>
             </plugin>
-            -->
 
         </plugins>
     </build>
