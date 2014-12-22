@@ -5,6 +5,11 @@
 \.conflict\~$
 syntax: glob
 
+# Vim files
+*~
+*.swp
+*.swo
+
 # Intellij
 .idea/
 *.iml
