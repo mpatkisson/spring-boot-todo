@@ -1,5 +1,7 @@
 
 function TaskCtrl($scope, $http, $window) {
+    'use strict';
+    
     var baseUrl = '/api/tasks';
     $scope.tasks = [];
     $scope.editing = false;

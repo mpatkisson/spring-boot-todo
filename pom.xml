@@ -189,19 +189,20 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jslint-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <groupId>com.cj.jshintmojo</groupId>
+                <artifactId>jshint-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>jslint</goal>
-                            <goal>test-jslint</goal>
+                            <goal>lint</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    
+                    <options>strict: true</options>
+                    <directories>
+                        <directory>src/main/resources/static/scripts</directory>
+                    </directories>
                 </configuration>
             </plugin>
 
