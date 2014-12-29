@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -39,7 +38,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
     private static final String VIEW = "index";
-    private static final String FORWARDED_URL = "/templates/index.html";
+    private static final String FORWARDED_URL = "/templates/tasks.html";
     private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
     
@@ -69,7 +68,7 @@ public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
     
     @Test
     public void viewIsReturned() throws Exception {
-        mockMvc.perform(get("/index.html"))
+        mockMvc.perform(get("/tasks.html"))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(view().name(VIEW))

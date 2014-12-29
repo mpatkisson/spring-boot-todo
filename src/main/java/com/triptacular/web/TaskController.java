@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Handles task related requests.
+ */
 @RestController
 public class TaskController {
 
@@ -23,9 +26,9 @@ public class TaskController {
         this.service = service;
     }
     
-    @RequestMapping(value = {"/", "/index", "/index.html"})
+    @RequestMapping(value = {"/tasks", "/tasks.html"})
     public ModelAndView index() throws JsonProcessingException {
-        ModelAndView view = new ModelAndView("index");
+        ModelAndView view = new ModelAndView("tasks");
         List<Task> tasks = service.getAll();
         view.addObject("tasks", tasks);
         return view;
