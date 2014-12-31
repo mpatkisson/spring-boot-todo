@@ -6,6 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
+import org.springframework.security.web.header.writers.HstsHeaderWriter;
+import org.springframework.security.web.header.writers.XContentTypeOptionsHeaderWriter;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 /**
  * Configures Spring Security.
@@ -17,23 +22,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home", "/index", "/index.html", "/webjars/**", "jawr_generator.css", "jawr_generator.js", "/bundles/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
+                .antMatchers("/", "/home", "/index", "/index.html", "/webjars/**", "/jawr_generator.css", "/jawr_generator.js", "/bundles/**", "/favicon.ico").permitAll()
+                .anyRequest()
+                .authenticated();
+
+        http.csrf()
+                .disable();
+
+        http.formLogin()
                 .loginPage("/login")
-                .permitAll()
-                .and()
-            .logout()
+                .permitAll();
+
+        http.logout()
                 .permitAll();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+        auth.inMemoryAuthentication()
+            .withUser("user").password("password").roles("USER");
     }
-
 
 }

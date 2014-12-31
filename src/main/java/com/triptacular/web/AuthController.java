@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Handles requests for the main home page.
+ * Handles authentication related requests.
  */
 @RestController
-public class HomeController {
+public class AuthController {
 
-    @RequestMapping(value = {"/", "/home", "/index", "/index.html"})
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    @RequestMapping(value = {"/login", "/login.html"})
+    public ModelAndView login() {
+        return new ModelAndView("login");
     }
+
 }
