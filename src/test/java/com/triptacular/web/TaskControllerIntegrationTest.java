@@ -37,7 +37,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @IntegrationTest
 public class TaskControllerIntegrationTest extends ControllerIntegrationTest {
 
-    private static final String VIEW = "index";
+    private static final String VIEW = "tasks";
     private static final String FORWARDED_URL = "/templates/tasks.html";
     private static final String JSON_CONTENT_TYPE = "application/json;charset=UTF-8";
     private ObjectMapper mapper;
