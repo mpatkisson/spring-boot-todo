@@ -6,6 +6,7 @@ import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,11 +18,12 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
  * @author Mike Atkisson
  */
 @Configuration
+@Profile({"production", "staging"})
 public class MongoConfig {
-    
+
     @Bean
     public MongoFactoryBean mongo() {
-        return new TriptacularMongoFactoryBean();
+        return new MongoFactoryBean();
     }
     
     @Bean
@@ -50,6 +52,12 @@ public class MongoConfig {
     public MongoCollection tasks() throws Exception {
         Jongo jongo = jongo();
         return jongo.getCollection("tasks");
+    }
+
+    @Bean
+    public MongoCollection users() throws Exception {
+        Jongo jongo = jongo();
+        return jongo.getCollection("users");
     }
     
 }

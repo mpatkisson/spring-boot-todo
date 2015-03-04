@@ -11,10 +11,7 @@ import org.springframework.data.mongodb.core.MongoFactoryBean;
  * 
  * @author Mike Atkisson
  */
-public class TriptacularMongoFactoryBean extends MongoFactoryBean {
-
-    @Value("${app.db.type}")
-    private String type;
+public class FongoFactoryBean extends MongoFactoryBean {
 
     private Mongo mongo;
     
@@ -28,18 +25,13 @@ public class TriptacularMongoFactoryBean extends MongoFactoryBean {
     }
     
     /**
-     * Sets the private
+     * Overridden to set fongo as the version of MongoDB to use.
      * @throws Exception 
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (type.equals("fongo")) {
-            Fongo fongo = new Fongo("InMemoryMongo");
-            mongo = fongo.getMongo();
-        } else {
-            super.afterPropertiesSet();
-            mongo = super.getObject();
-        }
+        Fongo fongo = new Fongo("InMemoryMongo");
+        mongo = fongo.getMongo();
     }
     
     @Override
