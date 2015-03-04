@@ -22,7 +22,7 @@ public abstract class Entity implements Comparable<Entity> {
     @Override
     public int compareTo(Entity entity) {
         if (entity == null) {
-            throw new NullPointerException("task cannot be null");
+            throw new NullPointerException("entity cannot be null");
         }
         
         int value = 0;
