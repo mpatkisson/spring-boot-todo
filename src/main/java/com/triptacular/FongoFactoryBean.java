@@ -2,7 +2,6 @@ package com.triptacular;
 
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 
 /**

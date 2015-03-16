@@ -1,6 +1,7 @@
 package com.triptacular.services;
 
 import com.triptacular.core.Entity;
+
 import java.util.List;
 
 /**

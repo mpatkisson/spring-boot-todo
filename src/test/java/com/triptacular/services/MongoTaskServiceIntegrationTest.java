@@ -2,20 +2,16 @@ package com.triptacular.services;
 
 import com.triptacular.Application;
 import com.triptacular.core.Task;
-import java.net.UnknownHostException;
-import java.util.List;
 import org.jongo.MongoCollection;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * Tests the in memory task service.
