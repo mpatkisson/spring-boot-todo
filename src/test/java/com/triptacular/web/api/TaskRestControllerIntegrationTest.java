@@ -5,7 +5,6 @@ import com.triptacular.Application;
 import com.triptacular.core.Task;
 import com.triptacular.services.TaskService;
 import com.triptacular.web.ControllerIntegrationTest;
-import com.triptacular.web.TaskController;
 import org.jongo.MongoCollection;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,7 +22,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.ServletContext;
-
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
