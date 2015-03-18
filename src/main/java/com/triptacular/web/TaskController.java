@@ -29,6 +29,9 @@ public class TaskController {
         ModelAndView view = new ModelAndView("tasks");
         List<Task> tasks = service.getAll();
         view.addObject("tasks", tasks);
+        Task mine = new Task();
+        mine.setItem("This is something I must do every day");
+        view.addObject("myTask", mine);
         return view;
     }
 

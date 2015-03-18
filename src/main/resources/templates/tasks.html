@@ -8,9 +8,9 @@
 </head>
 <body>
 <section layout:fragment="content">
-    <div data-ng-controller="TaskCtrl">
+    <div data-ng-controller="TaskCtrlOff">
         <div class="jumbotron">
-            <div class="container">
+            <div data-redbarn-bind="transform" class="container">
                 <script type="text/javascript">
                     window.initial = {};
                 </script>
@@ -18,7 +18,7 @@
                 <h1>Task List</h1>
 
                 <ul id="tasks" class="list-unstyled">
-                    <li data-ng-repeat="task in tasks">
+                    <li data-ng-repeat-off="task in tasks">
                         <span data-ng-hide="editing" data-ng-bind="task.item"></span>
                         <input type="text" data-ng-model="task.item" data-ng-show="editing" />&nbsp;
                         <a href="#" data-ng-click="editing = true" data-ng-hide="editing">edit</a>
@@ -35,11 +35,12 @@
         <div class="container">
             <hr />
 
-            <form class="form-inline">
+            <form th:action="@{/tasks/create}" class="form-inline" method="post">
                 <div class="form-group">
                     <label for="name">Task Name</label><br />
-                    <input class="form-control" id="name" placeholder="Enter a name for this task" style="width: 300px" type="text" data-ng-model="taskText" />&nbsp;
+                    <input class="form-control" id="name" name="item" placeholder="Enter a name for this task" type="text" data-ng-model="taskText" />&nbsp;
                     <button class="btn" data-ng-click="addTask()">Submit</button>
+                    <input type="submit" value="Submit POST" />
                 </div>
             </form>
             <hr />
