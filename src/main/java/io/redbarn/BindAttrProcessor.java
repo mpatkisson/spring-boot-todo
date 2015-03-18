@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by mike on 3/16/2015.
@@ -48,9 +49,12 @@ public class BindAttrProcessor extends AbstractUnescapedTextChildModifierAttrPro
 
             // Get the element's HTML and load it into a global variable
             // called "$"
+            String cssClass = element.getAttributeValue("class");
+            String uuid = UUID.randomUUID().toString();
+            element.setAttribute("class", cssClass + " " + uuid);
             String html = DOMUtils.getHtml5For(element);
             html = html.replaceAll("\\r|\\n", "");
-            String expression = "var $ = redbarn.cheerio.load('" + html + "')";
+            String expression = "var $ = cheerio.load('" + html + "')";
             Object dollar = engine.eval(expression);
 
             // Read the .html.js file and evaluate it
@@ -84,13 +88,11 @@ public class BindAttrProcessor extends AbstractUnescapedTextChildModifierAttrPro
             invocable.invokeFunction(functionName, args);
 
             // Get the results
-            String resultFunction = "function getResult() { ";
-            resultFunction += "  return $.html(); ";
-            resultFunction += "}";
-            engine.eval(resultFunction);
-            Object result = invocable.invokeFunction("getResult");
+            Object redbarn = engine.get("redbarn");
+            Object result = invocable.invokeMethod(redbarn, "getResult", uuid);
 
             text = result.toString();
+            element.setAttribute("class", cssClass);
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {

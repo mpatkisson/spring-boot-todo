@@ -3,10 +3,10 @@
 (function (red) {
     'use strict';
 
-    red.iterate = function (selector, items, binder) {
-        var $ele = $(selector),
-            template = $ele.html();
-        $ele.html('');
+    red.iterate = function ($ele, items, binder) {
+        var $first = $ele.children().first(),
+            template = $('<div>').append($first.clone()).html();
+        $ele.empty();
         items.forEach(function (item) {
             var $template = $(template);
             if (binder) {
@@ -15,5 +15,9 @@
             $ele.append($template);
         });
     };
+
+    red.getResult = function (uuid) {
+        return $('.' + uuid).html();
+    }
 
 })(redbarn);

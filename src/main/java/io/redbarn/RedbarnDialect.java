@@ -69,11 +69,11 @@ public class RedbarnDialect extends AbstractDialect {
         logger.info("Loading global aliases");
         evaluateScriptResource(engine, "redbarn/globals.js");
 
-        logger.info("Loading redbarn");
-        evaluateScriptResource(engine, "redbarn/redbarn.js");
-
         logger.info("Loading cheerio");
         evaluateScriptResource(engine, "redbarn/cheerio.js");
+
+        logger.info("Loading redbarn");
+        evaluateScriptResource(engine, "redbarn/redbarn.js");
 
         return engine;
     }

@@ -4846,9 +4846,7 @@ function hasOwnProperty(obj, prop) {
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./support/isBuffer":23,"_process":9,"inherits":7}],25:[function(require,module,exports){
 
-    if (redbarn) {
-        redbarn.cheerio = require('cheerio');
-    }
+    cheerio = require('cheerio');
 
 },{"cheerio":26}],26:[function(require,module,exports){
 /**
