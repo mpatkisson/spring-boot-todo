@@ -3,34 +3,40 @@ package com.triptacular;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 /**
  * Configures Spring Security.
  */
 @Configuration
-@EnableWebMvcSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home", "/index", "/index.html", "/webjars/**", "/jawr_generator.css", "/jawr_generator.js", "/bundles/**", "/favicon.ico").permitAll()
+                .antMatchers("/",
+                        "/home",
+                        "/index",
+                        "/index.html",
+                        "/webjars/**",
+                        "/jawr_generator.css",
+                        "/jawr_generator.js",
+                        "/bundles/**",
+                        "/favicon.ico")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
-
-        http.csrf()
-                .disable();
 
         http.formLogin()
                 .loginPage("/login")
                 .permitAll();
 
         http.logout()
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 
@@ -41,7 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password("password")
-                .roles("USER");
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password("password")
+                .roles("USER", "ADMIN");
     }
 
     @Autowired

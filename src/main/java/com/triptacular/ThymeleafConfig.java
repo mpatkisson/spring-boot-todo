@@ -1,7 +1,7 @@
 package com.triptacular;
 
 import com.github.dtrunk90.thymeleaf.jawr.JawrDialect;
-import io.redbarn.RedbarnDialect;
+import io.redbarn.thymeleaf.RedbarnDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

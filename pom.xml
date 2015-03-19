@@ -94,6 +94,17 @@
             <artifactId>thymeleaf-jawr-extension</artifactId>
             <version>1.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>io.redbarn</groupId>
+            <artifactId>redbarn-thymeleaf-dialect</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         
         <!-- Java Web Resource Bundler -->
         <dependency>
