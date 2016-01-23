@@ -11,9 +11,9 @@ syntax: glob
 *.swo
 
 # Intellij
-.idea/
-*.iml
-*.iws
+# .idea/
+# *.iml
+# *.iws
 
 # Eclipse
 .classpath
