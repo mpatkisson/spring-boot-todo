@@ -1,14 +1,14 @@
 package com.triptacular;
 
 import com.mongodb.DB;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoFactoryBean;
+import org.springframework.data.mongodb.core.MongoClientFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
@@ -22,14 +22,13 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 public class MongoConfig {
 
     @Bean
-    public MongoFactoryBean mongo() {
-        return new MongoFactoryBean();
+    public MongoClientFactoryBean mongo() {
+        return new MongoClientFactoryBean();
     }
     
     @Bean
     public MongoDbFactory mongoDbFactory() throws Exception {
-        Mongo mongo = mongo().getObject();
-        return new SimpleMongoDbFactory(mongo, "todo");
+        return new SimpleMongoDbFactory(new MongoClient(), "todo");
     }
 
     @Bean
