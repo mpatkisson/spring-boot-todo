@@ -2,7 +2,6 @@ package com.triptacular;
 
 import com.github.fakemongo.Fongo;
 import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -33,7 +32,6 @@ public class FongoConfig extends AbstractMongoConfiguration {
     @Bean
     public Jongo jongo() throws Exception {
         DB db = mongoDbFactory().getDb();
-        //DB db = mongo().getDB(getDatabaseName());
         return new Jongo(db);
     }
 
