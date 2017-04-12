@@ -18,7 +18,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home", "/index", "/index.html", "/webjars/**", "/jawr_generator.css", "/jawr_generator.js", "/bundles/**", "/favicon.ico").permitAll()
+                .antMatchers(
+                        "/", 
+                        "/home", 
+                        "/index", 
+                        "/index.html", 
+                        "/jawr_generator.css", 
+                        "/jawr_generator.js", 
+                        "/**/bundles/**", 
+                        "/favicon.ico")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
 

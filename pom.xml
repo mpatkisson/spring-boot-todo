@@ -74,6 +74,11 @@
         <!-- Webjars -->
         <dependency>
             <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>1.12.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>1.2.19</version>
         </dependency>
@@ -87,24 +92,25 @@
         <dependency>
             <groupId>com.github.dtrunk90</groupId>
             <artifactId>thymeleaf-jawr-extension</artifactId>
-            <version>1.0.1</version>
+            <version>1.2.1</version>
         </dependency>
         
         <!-- Java Web Resource Bundler -->
         <dependency>
             <groupId>net.jawr</groupId>
             <artifactId>jawr-core</artifactId>
-            <version>3.6</version>
+            <version>3.9</version>
         </dependency>
         <dependency>
             <groupId>net.jawr.extensions</groupId>
             <artifactId>jawr-spring-extension</artifactId>
-            <version>3.6</version>
+            <version>3.9</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.sommeri/less4j -->
         <dependency>
-            <groupId>com.asual.lesscss</groupId>
-            <artifactId>lesscss-engine</artifactId>
-            <version>1.5.1</version>
+            <groupId>com.github.sommeri</groupId>
+            <artifactId>less4j</artifactId>
+            <version>1.17.2</version>
         </dependency>
         
     </dependencies>
@@ -171,27 +177,6 @@
                       <version>1.2.7.RELEASE</version>
                   </dependency>
                 </dependencies>
-            </plugin>
-
-            <plugin>
-                <groupId>org.lesscss</groupId>
-                <artifactId>lesscss-maven-plugin</artifactId>
-                <version>1.7.0.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sourceDirectory>${project.basedir}/src/main/less</sourceDirectory>
-                    <outputDirectory>${project.basedir}/src/main/resources/static/styles</outputDirectory>
-                    <compress>false</compress>
-                    <includes>
-                        <include>main.less</include>
-                    </includes>
-                </configuration>
             </plugin>
 
             <plugin>
